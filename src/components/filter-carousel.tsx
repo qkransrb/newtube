@@ -17,14 +17,19 @@ import { cn } from "@/lib/utils";
 interface Props {
   value?: string | null;
   isLoading?: boolean;
-  onSelect: (value: string | null) => void;
+  onSelectAction: (value: string | null) => void;
   data: {
     value: string;
     label: string;
   }[];
 }
 
-export const FilterCarousel = ({ value, isLoading, onSelect, data }: Props) => {
+export const FilterCarousel = ({
+  value,
+  isLoading,
+  onSelectAction,
+  data,
+}: Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
@@ -62,7 +67,7 @@ export const FilterCarousel = ({ value, isLoading, onSelect, data }: Props) => {
       >
         <CarouselContent className="-ml-3">
           <CarouselItem
-            onClick={() => onSelect(null)}
+            onClick={() => onSelectAction(null)}
             className="pl-3 basis-auto"
           >
             <Badge
@@ -84,7 +89,7 @@ export const FilterCarousel = ({ value, isLoading, onSelect, data }: Props) => {
             data.map((item) => (
               <CarouselItem
                 key={item.value}
-                onClick={() => onSelect(item.value)}
+                onClick={() => onSelectAction(item.value)}
                 className="pl-3 basis-auto"
               >
                 <Badge
